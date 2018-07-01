@@ -2,4 +2,3 @@
 /dist
 **/tags
 /.cache
-package-lock.json
