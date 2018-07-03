@@ -4,7 +4,10 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './store/reducers';
-import { App }  from './App.jsx';
+import App  from './App.jsx';
+import 'typeface-roboto';
+import './styles.scss';
+
 
 const initialState = {};
 const store = createStore(reducers, initialState, applyMiddleware(thunk));

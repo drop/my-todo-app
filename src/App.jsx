@@ -4,54 +4,60 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Radio from '@material-ui/core/Radio';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import ImportanceSelector from './components/ImportanceSelector';
 
 const styles = {
-    root: {
-        flexGrow: 1,
-    },
     flex: {
         flex: 1,
+        color: '#fff',
     },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+    button: {
+        position: 'fixed',
+        bottom: '1.5em',
+        right: '1.5em',
     },
-    radioSize: {
-    }
+    textField: {
+        color: '#fff',
+    },
 };
 
-export class App extends React.Component {
+class App extends React.Component {
     render() {
-
+        const { classes } = this.props; 
         return (
             <div>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="title" color="inherit" className={styles.flex}>
-                            My todo list
+                        <Typography variant="title" className={classes.flex}>
+                            <TextField
+                                fullWidth
+                                id="todo"
+                                label="To do"
+                                className={classes.textField}
+                                onChange={this.handleInputText}
+                            />
                         </Typography>
+
+                        <ImportanceSelector />
                     </Toolbar>
-                    <Radio
-                        checked={false}
-                        onChange={this.handleChange}
-                        value="e"
-                        color="default"
-                        name="radio-button-demo"
-                        aria-label="E"
-                        className={styles.radioSize}
-                        icon={<RadioButtonUncheckedIcon />}
-                        checkedIcon={<RadioButtonCheckedIcon />}
-                    />
-              </AppBar>
+                </AppBar>
+                <Button variant="fab" color="primary" aria-label="add" className={classes.button}>
+                    <AddIcon />
+                </Button>
             </div>
         );
     }
 
-    handleChange() {
-    } 
+    handleInputText() {
+        console.log(this);
+    }
+
 }
+
+export default withStyles(styles)(App);
