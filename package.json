@@ -29,7 +29,5 @@
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.54"
   },
-  "devDependencies": {
-    "node-sass": "^4.9.0"
-  }
+  "devDependencies": {}
 }

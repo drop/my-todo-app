@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducers from './store/reducers';
 import App  from './App.jsx';
 import 'typeface-roboto';
-import './styles.scss';
+import './global.css';
 
 
 const initialState = {};
