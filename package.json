@@ -29,5 +29,7 @@
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.54"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "parcel-bundler": "^1.9.4"
+  }
 }
