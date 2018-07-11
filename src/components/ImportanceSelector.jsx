@@ -11,10 +11,6 @@ const styles = {
     radioSize: {
     },
     root: {
-        color: green[600],
-        '&$checked': {
-            color: green[500],
-        },
     },
     checked: {},
     green: {
@@ -37,6 +33,12 @@ const styles = {
     }
 };
 
+export const ImportanceColors = {
+    RED: 'red',
+    ORANGE: 'orange',
+    GREEN: 'green'
+}
+
 export class ImportanceSelector extends React.Component {
 
     render() {
@@ -44,10 +46,10 @@ export class ImportanceSelector extends React.Component {
         return (
             <div>
                 <Radio
-                    checked={false}
+                    checked={true}
                     onChange={this.handleChange}
-                    value="1"
-                    name="red"
+                    value={ImportanceColors.RED}
+                    name={ImportanceColors.RED}
                     aria-label="Red radio button."
                     icon={<RadioButtonUncheckedIcon />}
                     checkedIcon={<RadioButtonCheckedIcon />}
@@ -59,8 +61,8 @@ export class ImportanceSelector extends React.Component {
                 <Radio
                     checked={false}
                     onChange={this.handleChange}
-                    value="2"
-                    name="orange"
+                    value={ImportanceColors.ORANGE}
+                    name={ImportanceColors.ORANGE}
                     aria-label="Orange radio button."
                     icon={<RadioButtonUncheckedIcon />}
                     checkedIcon={<RadioButtonCheckedIcon />}
@@ -72,8 +74,8 @@ export class ImportanceSelector extends React.Component {
                 <Radio
                     checked={false}
                     onChange={this.handleChange}
-                    value="3"
-                    name="green"
+                    value={ImportanceColors.GREEN}
+                    name={ImportanceColors.GREEN}
                     aria-label="Green radio button."
                     icon={<RadioButtonUncheckedIcon />}
                     checkedIcon={<RadioButtonCheckedIcon />}
@@ -89,7 +91,7 @@ export class ImportanceSelector extends React.Component {
     }
 
     handleChange(event) {
-        console.log(this.name);
+        console.log(this.value);
     } 
 }
 

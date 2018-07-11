@@ -1,9 +1,16 @@
 import React from "react";
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+/*icons*/
 import AddIcon from '@material-ui/icons/Add';
+import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck';
+import List from '@material-ui/icons/List';
+import ViewHeadline from '@material-ui/icons/ViewHeadline';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+/*colors*/
 import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
@@ -38,13 +45,13 @@ const styles = {
             backgroundColor: green[800],
         },
     },
+    doneButton: {
+        position: 'absolute',
+        left: '9.65em',
+    },
     orderButton: {
         position: 'absolute',
-        left: '9.64em',
-    },
-    addButton: {
-        position: 'absolute',
-        left: '14.2em',
+        left: '14.15em',
     },
 };
 
@@ -53,23 +60,53 @@ class ButtonBlock extends React.Component {
         const { classes } = this.props; 
         return (
             <div className={classes.buttonContainer}>
-                <Button variant="fab" color="primary" aria-label="add button" className={classes.addButton}>
-                    <AddIcon />
+                <Button variant="fab" aria-label="red button"
+                    onClick={this.handleRedBtnClick}
+                    className={classes.redButton}>
+                    <Visibility />  
                 </Button>
-                <Button variant="fab" color="primary" aria-label="add button" className={classes.orderButton}>
+                <Button variant="fab" aria-label="orange button"
+                    onClick={this.handleOrangeBtnClick}
+                    className={classes.orangeButton}>
+                    <VisibilityOff />  
+                </Button>
+                <Button variant="fab" aria-label="green button"
+                    onClick={this.handleGreenBtnClick}
+                    className={classes.greenButton}>
+                    <VisibilityOff />  
+                </Button>
+                <Button variant="fab" color="primary" aria-label="done filter button"
+                        onClick={this.handleDoneBtnClick}
+                        className={classes.doneButton}>
+                    <PlaylistAddCheck />
+                </Button>
+                <Button variant="fab" color="primary" aria-label="add button"
+                        onClick={this.handleOrderBtnClick}
+                        className={classes.orderButton}>
                     <ExpandLess />
-                </Button>
-                <Button variant="fab" aria-label="red button" className={classes.redButton}>
-                    {''}  
-                </Button>
-                <Button variant="fab" aria-label="orange button" className={classes.orangeButton}>
-                    {''}  
-                </Button>
-                <Button variant="fab" aria-label="green button" className={classes.greenButton}>
-                    {''}  
                 </Button>
             </div>
         );
+    }
+
+    handleRedBtnClick() {
+        console.log('red');
+    }
+
+    handleOrangeBtnClick() {
+        console.log('orange');
+    }
+
+    handleGreenBtnClick() {
+        console.log('green');
+    }
+
+    handleDoneBtnClick() {
+        console.log('view done');
+    }
+
+    handleOrderBtnClick() {
+        console.log('order');
     }
 }
 

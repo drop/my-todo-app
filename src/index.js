@@ -5,11 +5,10 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './store/reducers';
 import App  from './App.jsx';
+import { initialState } from './store/state';
 import 'typeface-roboto';
 import './global.css';
 
-
-const initialState = {};
 const store = createStore(reducers, initialState, applyMiddleware(thunk));
 
 ReactDOM.render(

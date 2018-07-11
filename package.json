@@ -1,7 +1,7 @@
 {
   "name": "my-todo-app",
   "version": "1.0.0",
-  "description": "My todo app on react+redux+reselect libs.",
+  "description": "My todo app on react+redux libs.",
   "main": "index.js",
   "scripts": {
     "start": "parcel -p 8080 index.html",
@@ -29,7 +29,5 @@
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.54"
   },
-  "devDependencies": {
-    "parcel-bundler": "^1.9.4"
-  }
+  "devDependencies": {}
 }
