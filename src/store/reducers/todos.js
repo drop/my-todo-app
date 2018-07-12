@@ -48,6 +48,5 @@ function addTodo(id, todo, todos) {
         text: todo.text,
         done: todo.done,
     };
-    console.log('newTodos=', newTodos);
     return newTodos;
 }

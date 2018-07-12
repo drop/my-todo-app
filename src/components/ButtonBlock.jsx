@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-/*icons*/
 import AddIcon from '@material-ui/icons/Add';
 import PlaylistAddCheck from '@material-ui/icons/PlaylistAddCheck';
 import List from '@material-ui/icons/List';
@@ -10,10 +11,13 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-/*colors*/
 import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
+import { setStickerColor, setColorFilter, setDoneFilter,
+    setAscOrder, setTodoText } from '../store/actions/ui';
+import { ImportanceColors } from '../components/ImportanceSelector';
+import { ViewFilter } from '../store/state';
 
 const styles = {
     buttonContainer: {
@@ -57,57 +61,66 @@ const styles = {
 
 class ButtonBlock extends React.Component {
     render() {
-        const { classes } = this.props; 
+        const { ascOrder, classes, greenVisible,
+            orangeVisible, redVisible, setAscOrder,
+            setColorFilter, setDoneFilter, viewDone } = this.props; 
         return (
             <div className={classes.buttonContainer}>
                 <Button variant="fab" aria-label="red button"
-                    onClick={this.handleRedBtnClick}
+                    onClick={() => {setColorFilter(ImportanceColors.RED)}}
                     className={classes.redButton}>
-                    <Visibility />  
+                    {redVisible ? <Visibility /> : <VisibilityOff />}
                 </Button>
                 <Button variant="fab" aria-label="orange button"
-                    onClick={this.handleOrangeBtnClick}
+                    onClick={() => {setColorFilter(ImportanceColors.ORANGE)}}
                     className={classes.orangeButton}>
-                    <VisibilityOff />  
+                    {orangeVisible ? <Visibility /> : <VisibilityOff />}
                 </Button>
                 <Button variant="fab" aria-label="green button"
-                    onClick={this.handleGreenBtnClick}
+                    onClick={() => {setColorFilter(ImportanceColors.GREEN)}}
                     className={classes.greenButton}>
-                    <VisibilityOff />  
+                    {greenVisible ? <Visibility /> : <VisibilityOff />}
                 </Button>
                 <Button variant="fab" color="primary" aria-label="done filter button"
-                        onClick={this.handleDoneBtnClick}
+                        onClick={setDoneFilter}
                         className={classes.doneButton}>
-                    <PlaylistAddCheck />
+                        {viewDone == ViewFilter.DONE ? <PlaylistAddCheck /> : null}
+                        {viewDone == ViewFilter.NOT_DONE ? <List /> : null}
+                        {viewDone == ViewFilter.ALL ? <ViewHeadline /> : null}
                 </Button>
-                <Button variant="fab" color="primary" aria-label="add button"
-                        onClick={this.handleOrderBtnClick}
+                <Button variant="fab" color="primary" aria-label="order button"
+                        onClick={setAscOrder}
                         className={classes.orderButton}>
-                    <ExpandLess />
+                        {ascOrder ? <ExpandMore /> : <ExpandLess />}
                 </Button>
             </div>
         );
-    }
-
-    handleRedBtnClick() {
-        console.log('red');
-    }
-
-    handleOrangeBtnClick() {
-        console.log('orange');
-    }
-
-    handleGreenBtnClick() {
-        console.log('green');
     }
 
     handleDoneBtnClick() {
         console.log('view done');
     }
 
-    handleOrderBtnClick() {
-        console.log('order');
+}
+
+function mapStateToProps(state) {
+    return {
+        redVisible: state.ui.filter.redVisible,
+        orangeVisible: state.ui.filter.orangeVisible,
+        greenVisible: state.ui.filter.greenVisible,
+        viewDone: state.ui.filter.viewDone,
+        ascOrder: state.ui.ascOrder,
     }
 }
 
-export default withStyles(styles)(ButtonBlock);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        setColorFilter,
+        setDoneFilter,
+        setAscOrder,
+        setTodoText,
+    }, dispatch);
+}
+
+const component = connect(mapStateToProps, mapDispatchToProps)(ButtonBlock);
+export default withStyles(styles)(component);

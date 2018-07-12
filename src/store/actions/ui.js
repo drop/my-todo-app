@@ -1,29 +1,26 @@
-export function setStickerColor(color) {
+export function setStickerColor(stickerColor) {
     return {
         type: 'SET_COLOR',
-        color,
+        stickerColor,
     };
 }
 
-export function setColorFilter(color, visible) {
+export function setColorFilter(color) {
     return {
         type: 'SET_COLOR_FILTER',
-        color,
-        visible,
+        color
     };
 }
 
-export function setDoneFilter(filter) {
+export function setDoneFilter() {
     return {
         type: 'SET_DONE_FILTER',
-        filter,
     };
 }
 
-export function setAscOrder(ascOrder) {
+export function setAscOrder() {
     return {
         type: 'SET_ASC_ORDER',
-        ascOrder,
     };
 }
 

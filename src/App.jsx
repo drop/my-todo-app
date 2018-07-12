@@ -56,6 +56,7 @@ class App extends React.Component {
                                     value={todoText}
                                     className={classes.textField}
                                     onChange={this.handleInputText.bind(this)}
+                                    onKeyPress={this.handleKeyPress.bind(this)}
                                 />
                             </Typography>
                             <ImportanceSelector />
@@ -99,14 +100,22 @@ class App extends React.Component {
     }
 
     handleAddButtonClick() {
-        if (!WHITE_SPACES_REGEXP.test(this.props.todoText)) {
-            this.props.addTodo({
-                color: this.props.stickerColor,
-                text: this.props.todoText,
-                done: false,
-            });
+        if (this.props.filter.viewDone != ViewFilter.DONE) {
+            if (!WHITE_SPACES_REGEXP.test(this.props.todoText)) {
+                this.props.addTodo({
+                    color: this.props.stickerColor,
+                    text: this.props.todoText,
+                    done: false,
+                });
+            }
+            this.props.setTodoText('');
         }
-        this.props.setTodoText('');
+    }
+
+    handleKeyPress(event) {
+        if(event.key == 'Enter'){
+            this.handleAddButtonClick();
+        }
     }
 }
 

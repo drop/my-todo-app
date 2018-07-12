@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -6,6 +7,7 @@ import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
+import { setStickerColor } from '../store/actions/ui';
 
 const styles = {
     radioSize: {
@@ -42,12 +44,13 @@ export const ImportanceColors = {
 export class ImportanceSelector extends React.Component {
 
     render() {
-        const { classes } = this.props; 
+        const { classes, stickerColor } = this.props; 
+        const handler = value => {this.handleChangeColor(value)};
         return (
             <div>
                 <Radio
-                    checked={true}
-                    onChange={this.handleChange}
+                    checked={stickerColor == ImportanceColors.RED}
+                    onChange={function() {handler(this.value)}}
                     value={ImportanceColors.RED}
                     name={ImportanceColors.RED}
                     aria-label="Red radio button."
@@ -59,8 +62,8 @@ export class ImportanceSelector extends React.Component {
                     }}
                 />
                 <Radio
-                    checked={false}
-                    onChange={this.handleChange}
+                    checked={stickerColor == ImportanceColors.ORANGE}
+                    onChange={function() {handler(this.value)}}
                     value={ImportanceColors.ORANGE}
                     name={ImportanceColors.ORANGE}
                     aria-label="Orange radio button."
@@ -72,8 +75,8 @@ export class ImportanceSelector extends React.Component {
                     }}
                 />
                 <Radio
-                    checked={false}
-                    onChange={this.handleChange}
+                    checked={stickerColor == ImportanceColors.GREEN}
+                    onChange={function() {handler(this.value)}}
                     value={ImportanceColors.GREEN}
                     name={ImportanceColors.GREEN}
                     aria-label="Green radio button."
@@ -90,9 +93,17 @@ export class ImportanceSelector extends React.Component {
         );
     }
 
-    handleChange(event) {
-        console.log(this.value);
+    handleChangeColor(value) {
+        this.props.dispatch(setStickerColor(value));
     } 
 }
 
-export default withStyles(styles)(ImportanceSelector);
+
+function mapStateToProps(state) {
+    return {
+        stickerColor: state.ui.stickerColor,
+    }
+}
+
+const component = connect(mapStateToProps)(ImportanceSelector);
+export default withStyles(styles)(component);
